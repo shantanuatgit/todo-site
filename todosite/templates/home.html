@@ -1,0 +1,134 @@
+
+<!DOCTYPE html>
+
+<html lang="en-us" >
+<head>
+<title>TO Do-site | To Do List</title>
+<link rel="stylesheet" type="text/css" href="/static/admin/css/base.css">
+<link rel="stylesheet" type="text/css" href="/static/admin/css/login.css">
+
+
+
+
+    <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/static/admin/css/responsive.css">
+
+
+<meta name="robots" content="NONE,NOARCHIVE">
+</head>
+
+
+<body class=" login"
+  data-admin-utc-offset="0">
+
+<!-- Container -->
+
+<div id="container">
+
+  {% if messages %}
+  <ul class="messages">
+      {% for message in messages %}
+      <li  {% if message.tags %} class=" {{ message.tags }} " {% endif %}> <h2>{{ message }}</h2> </li>
+      {% endfor %}
+  </ul>
+  {% endif %}
+
+
+
+    <!-- Header -->
+    <div id="header">
+        <div id="branding">
+
+<h1 id="site-name"><a href="">To Do List</a></h1>
+
+        </div>
+
+
+    </div>
+    <!-- END Header -->
+
+
+
+
+
+
+
+    <!-- Content -->
+    <div id="content" class="colM">
+
+
+
+
+
+
+
+<div id="content-main">
+
+
+
+<form  method="post">
+  {% csrf_token %}
+  <div class="form-row">
+
+    What is to be done?
+    <br/>
+    <textarea name="task" rows="4" cols="50" required></textarea>
+  </div>
+
+  Select Date/Time:
+    <div class="form-row">
+    <input type="date" name="date" value="" required/>  <input type="time" name="time" value="" required/>
+
+  </div>
+
+  <div class="form-row">
+    Category:
+    <br/>
+    <select name="category" id="category">
+    <option value="default">Default</option>
+    <option value="personal">Presonal</option>
+    <option value="work">Work</option>
+    <option value="shopping">Shopping</option>
+  </select>
+
+  </div>
+
+
+
+  <div class="submit-row">
+    <label>&nbsp;</label><input type="submit" value="Add to List">
+  </div>
+</form>
+
+</div>
+
+        <br class="clear">
+    </div>
+
+    <!-- END Content -->
+
+    <div id="footer"></div>
+</div>
+<!-- END Container -->
+
+<div class="submit-row">
+<h1>All List:</h1>
+
+  {% for list in lists.all %}
+  <form  action="{{list.id}}" method="post">
+    {% csrf_token %}
+      <input type="submit" name="" value="Done !">
+      {{list.date}} ( {{list.time}} )
+      <br/>
+      <h2>
+       {{list.task}}
+
+    </h2>
+  <br/>
+  </form>
+  {% endfor %}
+</div>
+
+
+</body>
+</html>

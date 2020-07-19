@@ -15,7 +15,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from todoapp import views
+from todoapp.views import delete
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('',views.home,name='home'),
+    path('<int:pk>',views.delete,name="home"),
 ]
